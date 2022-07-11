@@ -27,6 +27,7 @@ bool operator<(const node& a, const node& b) {
 
 void printHelp() {
     cout << "E necessario passar um arquivo de entrada para este programa, caso contrario ele nao sera executado." << endl;
+    cout << "E necessario passar um vertice inicial para este programa, caso contrario ele nao sera executado." << endl;
     cout << "Caso nao seja passado um arquivo de saida, sera criado um arquivo de saida de nome 'dijkstra-saida.txt'." << endl << endl;
     cout << "Lista de comandos:" << endl << endl;
     cout << "-h : mostra as informacoes sobre a execucao do programa." << endl;
@@ -35,35 +36,11 @@ void printHelp() {
     cout << "   Exemplo: ./dijkstra -o arquivo-saida.txt" << endl << endl;
     cout << "-f <arquivo> : indica o 'arquivo' que contem o grafo de entrada." << endl;
     cout << "   Exemplo: ./dijkstra -f arquivo-entrada.txt" << endl << endl;
-    cout << "-s : mostra a solucao (em ordem crescente)." << endl << endl;
+    cout << "-s : mostra a solucao." << endl << endl;
     cout << "-i <vertice> : indica vertice inicial." << endl;
     cout << "   Exemplo: ./dijkstra -i 3" << endl << endl;
 
     exit(0);
-}
-
-void printGraphAdjMatrix(vector<vector<int>> graph) {
-    int numberOfNodes = graph.size() - 1; 
-
-    for(int i = 0; i <= numberOfNodes; i++) {
-        if(i == 0) {
-            cout << "# ";
-        }
-
-        for(int j = 0; j <= numberOfNodes; j++) {
-            if(i == 0 && j == 0){
-                continue;
-            } else if(i == 0) {
-                cout << j << " ";
-            } else if (j == 0) {
-                cout << i << " ";
-            } else {
-                cout << graph[i][j] << " ";
-            }
-        }
-
-        cout << endl;
-    }
 }
 
 void getNodesPath(solution solution, int finalVertex, bool print, ofstream * file) {
