@@ -38,8 +38,6 @@ void printHelp() {
     cout << "-s : mostra a solucao (em ordem crescente)." << endl << endl;
     cout << "-i <vertice> : indica vertice inicial." << endl;
     cout << "   Exemplo: ./dijkstra -i 3" << endl << endl;
-    cout << "-l <vertice> : indica o vertice final." << endl;
-    cout << "   Exemplo: ./dijkstra -l 5" << endl;
 
     exit(0);
 }
@@ -256,7 +254,6 @@ int main(int argc, char* argv[]) {
     bool printOutput = false;
     int numberOfNodes;
     int initialVertex = -1;
-    int finalVertex = -1;
     vector<vector<int>> graph;
     solution dijkstraSolution;
     ofstream outputFile;
@@ -277,10 +274,6 @@ int main(int argc, char* argv[]) {
         } else if(args[i] == "-i") {
             if(i < (argc - 1)) {
                 initialVertex = stoi(args[i+1]);
-            }
-        } else if(args[i] == "-l") {
-            if(i < (argc - 1)) {
-                finalVertex = stoi(args[i+1]);
             }
         } else {
             continue;
