@@ -166,10 +166,11 @@ int main(int argc, char* argv[]) {
     }
 
     if(!inputFilePath.empty()) {
-        outputFile.open(outputFilePath);
         createGraphFromFile(graph, inputFilePath);
-        prim(graph, tree, initialVertex, printOutput, &outputFile);
 
+        outputFile.open(outputFilePath);
+        prim(graph, tree, initialVertex, printOutput, &outputFile);
+        outputFile.close();
     } else {
         cout << "Erro! E necessario passar um arquivo de entrada." << endl << endl;
         printHelp();
