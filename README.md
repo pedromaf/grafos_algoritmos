@@ -2,7 +2,7 @@
 Implementação em C++ dos algoritmos: 
  * Dijkstra
  * Prim
- * Bellman-Ford
+ * Floyd-Warshall
  * Kruskal
 
 Execução:
