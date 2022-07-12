@@ -12,10 +12,12 @@
   * Todas as implementações descritas consideram grafos com vértices identificados por números inteiros maiores que 0.
   * As saídas dos algoritmos não seguem um padrão específico.
   * Todas as implementações descritas consideram arquivos de entrada no seguinte formato:
+
       ```
       |V| |E|
       ```
       seguido de |E| linhas na forma:
+      
       ```
       Vn Vm W(VnVm)
       ```
