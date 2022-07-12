@@ -20,6 +20,6 @@ Observações:
       * |E| o número de arestas do grafo;
       * Vn um vértice de V;
       * VnVm uma aresta de E formada pelos vértices Vn e Vm;
-      * W(VnVm) o peso da aresta VnVm.
+      * W(VnVm) o peso da aresta VnVm (para grafos sem pesos, esse elemento pode ser omitido no arquivo de entrada).
   
   * As saídas dos algoritmos não seguem um padrão específico.
