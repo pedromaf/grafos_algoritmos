@@ -102,9 +102,9 @@ void printResult(int numberOfNodes, matrix &distMatrix, vector<vector<int>> &pre
         for(int j = 1; j <= numberOfNodes; j++) {
             if(distMatrix[i][j] != HUGE_VAL) {
                 if(i != j) {
-                    (*(file)) << "A menor distancia de " << i << " para " << j << " e " << distMatrix[i][j] << "." << endl;
+                    (*(file)) << "O menor custo de " << i << " para " << j << " e " << distMatrix[i][j] << "." << endl;
                     if(print) {
-                        cout << "A menor distancia de " << i << " para " << j << " e " << distMatrix[i][j] << "." << endl;
+                        cout << "O menor custo de " << i << " para " << j << " e " << distMatrix[i][j] << "." << endl;
                     }
                 }
             } else {
