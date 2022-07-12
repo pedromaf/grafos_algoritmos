@@ -1,15 +1,16 @@
 # Teoria dos Grafos
-Implementação em C++ dos algoritmos: 
- * Dijkstra
- * Prim
- * Floyd-Warshall
- * Kruskal
+ Implementação em C++ dos algoritmos: 
+  * Dijkstra
+  * Prim
+  * Floyd-Warshall
+  * Kruskal
 
 ## Execução
- * Para ver instruções sobre a execução de cada algoritmo execute-os utilizando a flag **-h** no terminal.
+ Para ver instruções sobre a execução de cada algoritmo execute-os utilizando a flag **-h** no terminal.
 
 ## Observações
   * Todas as implementações descritas consideram grafos com vértices identificados por números inteiros maiores que 0.
+  * As saídas dos algoritmos não seguem um padrão específico.
   * Todas as implementações descritas consideram arquivos de entrada no seguinte formato:
       ```
       |V| |E|
@@ -21,8 +22,6 @@ Implementação em C++ dos algoritmos:
       Sendo: 
       * |V| o número de vértices do grafo;
       * |E| o número de arestas do grafo;
-      * Vn um vértice de V;
+      * Vn e Vm vértices distintos de V;
       * VnVm uma aresta de E formada pelos vértices Vn e Vm;
       * W(VnVm) o peso da aresta VnVm (para grafos sem pesos, esse elemento pode ser omitido no arquivo de entrada).
-  
-  * As saídas dos algoritmos não seguem um padrão específico.
