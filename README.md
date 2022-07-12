@@ -6,18 +6,18 @@ Implementação em C++ dos algoritmos:
  * Kruskal
 
 ## Execução
- * Para ver instruções sobre a execução de cada algoritmo execute-os utilizando a flag -h no terminal.
+ * Para ver instruções sobre a execução de cada algoritmo execute-os utilizando a flag **-h** no terminal.
 
 ## Observações
-  * Todas as implementações descritas consideram grafos com vértices identificados por números maiores que 0.
+  * Todas as implementações descritas consideram grafos com vértices identificados por números inteiros maiores que 0.
   * Todas as implementações descritas consideram arquivos de entrada no seguinte formato:
-      
+      ```
       |V| |E|
-      
+      ```
       seguido de |E| linhas na forma:
-      
+      ```
       Vn Vm W(VnVm)
-      
+      ```
       Sendo: 
       * |V| o número de vértices do grafo;
       * |E| o número de arestas do grafo;
