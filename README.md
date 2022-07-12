@@ -5,10 +5,10 @@ Implementação em C++ dos algoritmos:
  * Floyd-Warshall
  * Kruskal
 
-Execução:
+##Execução
  * Para ver instruções sobre a execução de cada algoritmo execute-os utilizando a flag -h no terminal.
 
-Observações:
+##Observações
   * Todas as implementações descritas consideram grafos com vértices identificados por números maiores que 0.
   * Todas as implementações descritas consideram arquivos de entrada no seguinte formato:
       
