@@ -1,5 +1,5 @@
 #include <iostream>
-#include <climits>
+#include <cmath>
 #include <fstream>
 #include <vector>
 #include <string>
@@ -7,17 +7,18 @@
 #include <map>
 #include <queue>
 #include <set>
+#include <iomanip>
 
 using namespace std;
 
 typedef struct Node{
     int nodeId;
-    int priority;
+    double priority;
 } node;
 
 typedef struct Solution {
     int initialVertex;
-    map<int, int> totalCost;
+    map<int, double> totalCost;
     map<int, int> prevNode;
 } solution;
 
@@ -72,17 +73,24 @@ void generateNodesPaths(solution solution, int numberOfNodes, bool print, ofstre
 }
 
 void generateTextSolution(solution solution, int numberOfNodes, bool print, ofstream * file) {
+    cout << setprecision(2) << fixed;
+    *(file) << setprecision(2) << fixed;
+
     if(print) {
         cout << "--------Menor Custo--------" << endl;
     }
     *(file) << "--------Menor Custo--------" << endl;
     for(int i = 1; i <= numberOfNodes; i++) {
-        if(i != solution.initialVertex && solution.totalCost[i] != INT_MAX) {
+        if(i != solution.initialVertex && solution.totalCost[i] != HUGE_VAL) {
             if(print) {
-                cout << "O menor custo para ir de " + to_string(solution.initialVertex) + " ate " + to_string(i) + " e " + to_string(solution.totalCost[i]) + "." << endl;
+                cout << "O menor custo para ir de " + to_string(solution.initialVertex) + " ate " + to_string(i) + " e ";
+                cout << solution.totalCost[i];
+                cout << "." << endl;
             }
-            *(file) << "O menor custo para ir de " + to_string(solution.initialVertex) + " ate " + to_string(i) + " e " + to_string(solution.totalCost[i]) + "." << endl;
-        } else if (solution.totalCost[i] == INT_MAX) {
+            *(file) << "O menor custo para ir de " + to_string(solution.initialVertex) + " ate " + to_string(i) + " e ";
+            *(file) << solution.totalCost[i];
+            *(file) << "." << endl;
+        } else if (solution.totalCost[i] == HUGE_VAL) {
             if(print) {
                 cout << "Nao existe caminho de " + to_string(solution.initialVertex) + " ate " + to_string(i) + "." << endl;
             }
@@ -95,8 +103,8 @@ void generateTextSolution(solution solution, int numberOfNodes, bool print, ofst
     *(file) << endl;
 }
 
-vector<int> getEdgeValues(string fileLine) {
-    vector<int> edgeValues(3, 0);
+vector<double> getEdgeValues(string fileLine) {
+    vector<double> edgeValues(3, 0.0);
     stringstream tempStream;
 
     tempStream << fileLine;
@@ -108,13 +116,13 @@ vector<int> getEdgeValues(string fileLine) {
     return edgeValues;
 }
 
-vector<vector<int>> createGraphFromFile(string inputFilePath) {
+void createGraphFromFile(vector<vector<double>> &graph, string inputFilePath) {
     string fileLine;
     stringstream tempStream;
     ifstream inputFile;
     int numberOfVertices;
     int numberOfEdges;
-    vector<int> edgeValues;
+    vector<double> edgeValues;
 
     inputFile.open(inputFilePath);
 
@@ -123,55 +131,51 @@ vector<vector<int>> createGraphFromFile(string inputFilePath) {
     tempStream >> numberOfVertices;
     tempStream >> numberOfEdges;
 
-    vector<vector<int>> adjMatrix(numberOfVertices + 1, vector<int>(numberOfVertices + 1, 0));
+    graph = vector<vector<double>>(numberOfVertices + 1, vector<double>(numberOfVertices + 1, 0.0));
 
     for(int i = 0; i < numberOfEdges; i++) {
         getline(inputFile, fileLine);
         edgeValues = getEdgeValues(fileLine);
-        adjMatrix[edgeValues[0]][edgeValues[1]] = edgeValues[2];
-        adjMatrix[edgeValues[1]][edgeValues[0]] = edgeValues[2];
+        graph[edgeValues[0]][edgeValues[1]] = edgeValues[2];
+        graph[edgeValues[1]][edgeValues[0]] = edgeValues[2];
     }
 
     inputFile.close();
-
-    return adjMatrix;
 }
 
-node* createNode(int nodeId, int priority) {
+node createNode(int nodeId, double priority) {
     node* newNode = new node;
     (*(newNode)).nodeId = nodeId;
     (*(newNode)).priority = priority;
 
-    return newNode;
+    return *newNode;
 }
 
-vector<node> getNeighbors(vector<vector<int>> graph, int nodeId) {
+vector<node> getNeighbors(vector<vector<double>> &graph, int nodeId) {
     vector<node> neighbors;
     int numberOfNodes = graph.size() - 1;
-    node* newNode;
 
     for(int i = 1; i <= numberOfNodes; i++) {
         if(graph[nodeId][i] > 0) {
-            newNode = createNode(i, graph[nodeId][i]);
-            neighbors.push_back(*(newNode));
+            neighbors.push_back(createNode(i, graph[nodeId][i]));
         }
     }
 
     return neighbors;
 }
 
-solution dijkstra(vector<vector<int>> graph, int initialVertex) {
+solution dijkstra(vector<vector<double>> &graph, int initialVertex) {
     if(initialVertex != -1) {
         solution dijkstraSolution;
         int numberOfNodes = graph.size() - 1;
-        map<int, int> totalCost;
+        map<int, double> totalCost;
         map<int, int> prevNode;
         set<int> visited;
         priority_queue<node> priorityQueue;
         node initialNode;
         node currentNode;
         vector<node> neighbors;
-        int newPriority;
+        double newPriority;
 
         prevNode[initialVertex] = initialVertex;
         initialNode.nodeId = initialVertex;
@@ -180,9 +184,9 @@ solution dijkstra(vector<vector<int>> graph, int initialVertex) {
 
         for(int i = 1; i <= numberOfNodes; i++) {
             if(i != initialVertex) {
-                totalCost[i] = INT_MAX;
+                totalCost[i] = HUGE_VAL;
             } else {
-                totalCost[initialVertex] = 0;
+                totalCost[initialVertex] = 0.0;
             }
         }
 
@@ -208,8 +212,6 @@ solution dijkstra(vector<vector<int>> graph, int initialVertex) {
                     }
                 }
             }
-
-            delete &currentNode;
         }
 
     dijkstraSolution.initialVertex = initialVertex;
@@ -231,7 +233,7 @@ int main(int argc, char* argv[]) {
     bool printOutput = false;
     int numberOfNodes;
     int initialVertex = -1;
-    vector<vector<int>> graph;
+    vector<vector<double>> graph;
     solution dijkstraSolution;
     ofstream outputFile;
 
@@ -258,7 +260,7 @@ int main(int argc, char* argv[]) {
     }
 
     if(!inputFilePath.empty()) {
-        graph = createGraphFromFile(inputFilePath);
+        createGraphFromFile(graph, inputFilePath);
         dijkstraSolution = dijkstra(graph, initialVertex);
         numberOfNodes = graph.size() - 1;
         outputFile.open(outputFilePath);
