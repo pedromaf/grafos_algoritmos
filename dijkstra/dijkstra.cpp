@@ -164,9 +164,8 @@ vector<node> getNeighbors(vector<vector<double>> &graph, int nodeId) {
     return neighbors;
 }
 
-solution dijkstra(vector<vector<double>> &graph, int initialVertex) {
+void dijkstra(solution &dijkstraSolution, vector<vector<double>> &graph, int initialVertex) {
     if(initialVertex != -1) {
-        solution dijkstraSolution;
         int numberOfNodes = graph.size() - 1;
         map<int, double> totalCost;
         map<int, int> prevNode;
@@ -218,8 +217,6 @@ solution dijkstra(vector<vector<double>> &graph, int initialVertex) {
     dijkstraSolution.totalCost = totalCost;
     dijkstraSolution.prevNode = prevNode;
 
-    return dijkstraSolution;
-
     } else {
         cout << "Erro! E necessario indicar o vertice inicial." << endl << endl;
         printHelp();
@@ -261,7 +258,7 @@ int main(int argc, char* argv[]) {
 
     if(!inputFilePath.empty()) {
         createGraphFromFile(graph, inputFilePath);
-        dijkstraSolution = dijkstra(graph, initialVertex);
+        dijkstra(dijkstraSolution, graph, initialVertex);
         numberOfNodes = graph.size() - 1;
         outputFile.open(outputFilePath);
 
